@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>develog</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <style type="text/css">
+      html, body{
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        line-height: 1;
+        vertical-align: baseline;
+      }
+      .__wrap{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+      }
+      .wrap__left{
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 13.12rem;
+        min-width: 13.12rem;
+        height:100%;
+        background: #999;
+        transition: all 0.5s;
+      }
+      .wrap__right{
+        flex: 1;
+        min-width: 23.437rem;
+        height:100%;
+      }
+      header.header{
+        position: relative;
+        width: 100%;
+        height: 2.4rem;
+        background-color: #36393F;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+      }
+      header.header .header-toggle,
+      header.header .header-item,
+      header.header .header-account
+      {
+        box-sizing: border-box;
+        flex:1;
+        display:flex;
+        align-items: center;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      header.header .header-item{
+        justify-content: center;
+      }
+      header.header .header-account{
+        justify-content: flex-end;
+        padding-right: 2rem;
+      }
+      .fa-arrow-left, .fa-sort-down{
+        color: #E5E5E5;
+        cursor: pointer;
+        transition: all 1.0s;
+      }
+      .title-describe{
+        font-size: 0.875rem;
+        font-weight: bold;
+        color: #FFFFFF;
+      }
+      .account_circle{
+        width: 1.5rem;
+        height: 1.5rem;
+        background: #18A0FB;
+        border-radius: 11.5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #FFFFFF;
+        font-size: 0.9rem;
+        font-weight: bold;
+        margin-right: .5rem;
+      }
+      .account_name{
+        color: #FFFFFF;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-right: .5rem;
+      }
+      .lef-top{
+        position:relative;
+        width: 100%;
+        height: 2.4rem;
+        background-color: #36393F;
+        border-right:1px solid #090909;
+        z-index: 1;
+        overflow: hidden;
+      }
+      .lef-content{
+        position: relative;
+        width: 100%;
+        height: -moz-calc(2.4rem));
+        height: -webkit-calc(2.4rem));
+        height: calc(100% - (2.4rem));
+        background-color: #FFFFFF;
+        border-right:1px solid #E5E5E5;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .lef-menus, .lef-search{
+        box-sizing: border-box;
+        min-width: 13.12rem;
+      }
+      .lef-content .fas, .lef-content .far{
+        font-size: 1rem;
+        width: 1rem;
+        color: #919191;
+        margin-top: 0.1rem;
+        margin-right: 0.9375rem;
+      }
+      .lef-search{
+        display: inline-flex;
+        padding: 1rem;
+        border-bottom: 1px solid #F4EFEF;
+      }
+      .lef-search input{
+        width: 95%;
+        width: -moz-calc(100% - 1.9375rem );
+        width: -webkit-calc(100% - 1.9375rem );
+        width: calc(100% - 1.9375rem );
+        color: #666666;
+        font-size: 0.875rem;
+        border: none;
+        outline: none;
+      }
+      .lef-search input::placeholder{
+        font-size: 0.875rem;
+        color: #999999;
+      }
+      ul.menuList{
+        list-style: none;
+        padding: 0;
+        margin-top: 0.5rem;
+        width: 100%;
+      }
+      ul.menuList li{
+        box-sizing: border-box;
+        padding: 0.625rem 1rem;
+        color: #666666;
+        font-size: 0.875rem;
+        cursor: pointer;
+      }
+      ul.menuList li.line{
+        padding: 0;
+        margin: 0.5rem 0;
+        border-top: 1px solid #F4EFEF;
+      }
+      ul.menuList li.active{
+        background-color: #DAEBF7;
+      }
+      @media (max-width: 768px) {
+        .wrap__left{
+          width:0;
+          min-width:0;
+        }
+        .fa-arrow-left{
+          transform: rotate3d(0, 1, 0, 180deg);
+        }
+      }
+      .container{
+        height: -moz-calc(2.4rem));
+        height: -webkit-calc(2.4rem));
+        height: calc(100% - (2.4rem));
+      }
+
+      .logo_b{
+        box-sizing: border-box;
+        position: relative;
+        margin-top: 0.3rem;
+        margin-left: 1rem;
+        width: 6rem;
+        height: 1.5rem;
+        background-color: #FFF3F3;
+        border-radius: 1px;
+        cursor: pointer;
+      }
+      .logo_b::after{
+        content: '';
+        position: absolute;
+        color: red;
+        left: 0;
+        bottom: -0.4rem;
+        border-left: 0.5rem solid #FFF3F3;
+        border-bottom: 0.5rem solid rgba(255,255,255,0);
+      }
+      .logo_b::before{
+        content: 'DEVELOG';
+        position: absolute;
+        color: #2C2C2C;
+        left: 0.7rem;
+        top: 0.3rem;
+        font-weight: bold;
+        font-size: 0.975rem;
+      }
+      .account_menu{
+        position: absolute;
+        padding: 0.5rem 0;
+        top: 0;
+        right: 2rem;
+        margin-top: 3.0rem;
+        background-color: #36393F;
+        color:#fff;
+        border-radius: 2px;
+        visibility: hidden;
+      }
+      .account_menu::after{
+        content: '';
+        position: absolute;
+        top: -0.4rem;
+        right: 0;
+        border-left: 0.5rem solid rgba(255,255,255,0);
+        border-bottom: 0.5rem solid #36393F;
+      }
+      .account_menu div{
+        font-size: 0.8rem;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+      }
+      .account_menu div:hover{
+        background-color: #18A0FB;
+        transition: ease-in .125s;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="__wrap">
+      <div class="wrap__left">
+        <div class="lef-top"><div class="logo_b"></div></div>
+        <div class="lef-content">
+          <div class="lef-search">
+            <span class="fas fa-search"></span><input type="text" placeholder="Search"/>
+          </div>
+          <div class="lef-menus">
+            <ul class="menuList">
+              <li class="active">
+                <span class="far fa-copy"></span>Projects
+              </li>
+              <li>
+                <span class="far fa-bookmark"></span>Notice
+              </li>
+              <li>
+                <span class="fas fa-stream"></span>Board
+              </li>
+              <li>
+                <span class="fas fa-download"></span>Archive
+              </li>
+              <li class="line"></li>
+              <li>
+                <span class="fas fa-users"></span>Team
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="wrap__right">
+        <header class="header">
+          <div class="header-toggle">
+            <span class="fas fa-arrow-left"></span>
+          </div>
+          <div class="header-item">
+            <span class="title-describe">Projects</span>
+          </div>
+          <div class="header-account">
+            <div class="account_circle">E</div>
+            <div class="account_name">Ezhun</div>
+            <span class="fas fa-sort-down"></span>
+            <div class="account_menu">
+              <div>Account setting</div>
+              <div>Sign out</div>
+            </div>
+          </div>
+        </header>
+        <div class="container">
+          여기 내용을 담을 곳!!
+        </div>
+      </div>
+
+
+    </div>
+    <script type="text/javascript">
+      //left menu toggle
+      const TOGGLE_LEFT_BUTTON = document.querySelector(".header-toggle span");
+      const LEFT_AREA = document.querySelector(".wrap__left");
+      TOGGLE_LEFT_BUTTON.addEventListener("click", function(){
+        toggleMenu(LEFT_AREA.clientWidth);
+      });
+      const toggleMenu = function(leftWidth){
+        if(leftWidth > 0){
+          toggleMenuClose();
+        }else{
+          toggleMenuOpen();
+        }
+      }
+      const toggleMenuClose = function(){
+        LEFT_AREA.style.width = "0";
+        LEFT_AREA.style.minWidth = "0";
+        TOGGLE_LEFT_BUTTON.style.transform = "rotate3d(0, 1, 0, 180deg)";
+      }
+      const toggleMenuOpen = function(){
+        LEFT_AREA.style.width = "13.12rem";
+        LEFT_AREA.style.minWidth = "13.12rem";
+        TOGGLE_LEFT_BUTTON.style.transform = "rotate3d(0, 0, 0, 0)";
+      }
+
+      //account menu toggle
+      const TOGGLE_ACCOUNT_BUTTON = document.querySelector(".header-account span");
+      const ACCOUNT_AREA = document.querySelector(".account_menu");
+      TOGGLE_ACCOUNT_BUTTON.addEventListener("click", function(){
+        if(ACCOUNT_AREA.style.visibility == "visible"){
+          toggleAccountClose();
+        }else{
+          toggleAccountOpen();
+        }
+      });
+      document.addEventListener("click", function(e){
+        const accountContainer = [e.target.className, e.target.parentNode.className];
+        const valid = accountContainer.includes('account_menu') || accountContainer.includes('fas fa-sort-down');
+        if(!valid){
+          if(ACCOUNT_AREA.style.visibility == "visible"){
+            toggleAccountClose();
+          }
+        }
+      });
+      const toggleAccountOpen = function(){
+        ACCOUNT_AREA.style.visibility = "visible";
+      }
+      const toggleAccountClose = function(){
+        ACCOUNT_AREA.style.visibility = "hidden";
+      }
+    </script>
+  </body>
+</html>
