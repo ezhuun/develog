@@ -104,6 +104,7 @@
       .lef-content{
         position: relative;
         width: 100%;
+        height: 100%;
         height: -moz-calc(2.4rem));
         height: -webkit-calc(2.4rem));
         height: calc(100% - (2.4rem));
@@ -237,6 +238,64 @@
         background-color: #18A0FB;
         transition: ease-in .125s;
       }
+      .container{
+        padding: 1rem;
+        box-sizing: border-box;
+      }
+
+      /* proejct */
+      .projectBox{
+        -ms-user-select: none;
+        -moz-user-select: -moz-none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+        width: 100%;
+        height: 100%;
+        padding-left: 1rem;
+        box-sizing: border-box;
+      }
+
+      .projects, .new-projects{
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 24rem;
+        height: 13.75rem;
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 4px;
+        cursor: default;
+      }
+      .projects{
+        border: 1px solid #CECECE;
+      }
+      .projects.active{
+        border: 1px solid #18a0fb;
+      }
+      .new-projects{
+        border: 1px dashed #88CCFA;
+        color: #88CCFA;
+        font-weight: bold;
+      }
+
+      .new-projects:hover{
+        border: 1px dashed #18A0FB;
+        color: #18A0FB;
+      }
+      @media (max-width: 970px) {
+        .projects, .new-projects{
+          width: 95%;
+        }
+      }
+
+      .projects-title{
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #999999;
+      }
+
     </style>
   </head>
   <body>
@@ -289,10 +348,38 @@
           </div>
         </header>
         <div class="container">
-          여기 내용을 담을 곳!!
+
+            <div class="projectBox">
+              <div class="projects" data_id="0">
+                <div class="projects-title">
+                  Proejct1
+                </div>
+              </div>
+              <div class="projects" data_id="1">
+                <div class="projects-title">
+                  Proejct2
+                </div>
+              </div>
+              <div class="projects" data_id="2">
+                <div class="projects-title">
+                  Proejct3
+                </div>
+              </div>
+              <div class="projects" data_id="3">
+                <div class="projects-title">
+                  Proejct4
+                </div>
+              </div>
+              <div class="projects" data_id="4">
+                <div class="projects-title">
+                  Proejct5
+                </div>
+              </div>
+              <div id="createProejct" class="new-projects">+ New Project</div>
+            </div>
+
         </div>
       </div>
-
 
     </div>
     <script type="text/javascript">
@@ -345,6 +432,51 @@
       const toggleAccountClose = function(){
         ACCOUNT_AREA.style.visibility = "hidden";
       }
+
+
+
+      //new project
+      const createProejct = document.querySelector("#createProejct");
+      createProejct.addEventListener("click", function(){
+        alert('open create proejct form');
+      });
+
+      //onClick line paint&remove
+      const projectBox = document.querySelector(".projectBox");
+      projectBox.addEventListener("click", function(e){
+        const projects = projectBox.children;
+        //onClick line remove
+        for(let i=0; i<projects.length; i++){
+            if(projects[i].classList.contains('projects')){
+              if(projects[i].classList.contains('active')){
+                projects[i].classList.remove('active');
+              }
+            }
+        }
+        //onClick line painting
+        const projectContainer = [e.target, e.target.parentNode];
+        const projectClassContainer = [e.target.className, e.target.parentNode.className];
+        const indexof = projectClassContainer.indexOf('projects');
+        if(indexof > -1){
+          const target = projectContainer[indexof];
+          target.classList.add('active');
+        }
+      });
+
+      //onDoubleClick enter
+      projectBox.addEventListener("dblclick", function(e){
+        const projectContainer = [e.target, e.target.parentNode];
+        const projectClassContainer = [e.target.className, e.target.parentNode.className];
+        const indexof = projectClassContainer.indexOf('projects') && projectClassContainer.indexOf('projects active');
+        if(indexof > -1){
+          const target = projectContainer[indexof];
+          const data_id = target.attributes.data_id.value;
+
+          alert(data_id);
+        }
+      })
+
+
     </script>
   </body>
 </html>
